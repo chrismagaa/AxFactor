@@ -19,7 +19,6 @@ class AppRepository() {
     private var firebaseAuth: FirebaseAuth? = null
     var userLiveData: MutableLiveData<FirebaseUser>
     var armadorasLiveData: MutableLiveData<List<Armadora>>
-    var lineasLiveData: MutableLiveData<List<Linea>>
     var laboratoriosLiveData: MutableLiveData<List<String>>
     var formulasLiveData: MutableLiveData<List<Formula>>
     var usersLiveData: MutableLiveData<List<User>>
@@ -32,7 +31,6 @@ class AppRepository() {
         loggedOutLiveData = MutableLiveData()
         database = Firebase.database.reference
         armadorasLiveData = MutableLiveData()
-        lineasLiveData = MutableLiveData()
         usersLiveData = MutableLiveData()
         formulasLiveData = MutableLiveData()
         laboratoriosLiveData = MutableLiveData()
@@ -43,7 +41,7 @@ class AppRepository() {
             loggedOutLiveData.postValue(false)
         }
     }
-
+/*
     fun login(email: String?, password: String?, activity: Activity) {
         firebaseAuth!!.signInWithEmailAndPassword(email!!, password!!)
                 .addOnCompleteListener(activity) { task ->
@@ -65,6 +63,8 @@ class AppRepository() {
                     }
                 }
     }
+
+ */
 
     fun saveUser(uid: String, email: String, rol: String, activity: Activity) {
        val prefs = activity.getSharedPreferences("PREFERENCE_FILE_KEY", Context.MODE_PRIVATE).edit()
@@ -94,47 +94,8 @@ class AppRepository() {
         }
     }
 
-    fun getLineas(){
-        database.child("Lineas").get().addOnSuccessListener {
-            if(it.exists()){
-                val listLinea = arrayListOf<Linea>()
-                it.children.forEach{armadora ->
-                    listLinea.add(Linea(armadora.value as String?))
-                }
-                lineasLiveData.postValue(listLinea)
-            }
-        }.addOnCanceledListener {
-            Log.w("FIREBASE_GET_LINEAS", "loadPost:onCancelled")
-        }
-    }
 
-    fun getLaboratorios(){
-        database.child("Laboratorios").get().addOnSuccessListener {
-            if(it.exists()){
-                laboratoriosLiveData.postValue(it.value as List<String>?)
-            }
-        }
-            .addOnCanceledListener {
-                Log.w("FIREBASE_GET_LABORATO", "loadPost:onCancelled")
-            }
-    }
-
-    fun getUsers(){
-        database.child("users").get().addOnSuccessListener {
-            if(it.exists()){
-                var list = arrayListOf<User>()
-                it.children.forEach{
-                    list.add(it.getValue(User::class.java)!!)
-                }
-                usersLiveData.postValue(list)
-            }
-        }
-                .addOnCanceledListener {
-                    Log.w("FIREBASE_GET_USERS", "loadPost:onCancelled")
-                }
-    }
-
-
+/*
     fun getFormulasOneTime(){
         database.child("users").child("EQQq3yNMM7Xeoh6fAIlVH01Q2fC3").child("formulas").get().addOnSuccessListener {
             if(it.exists()){
@@ -159,8 +120,14 @@ class AppRepository() {
         }
     }
 
-    fun writeNewFormula(formula: Formula, userId: String, codigo: String) {
-        database.child("formulas").child(userId).child(codigo).setValue(formula)
+ */
+
+    fun writeNewFormula(formula: Formula, codigo: String, onSuccess: () -> Unit, onError: () -> Unit){
+        database.child("formulas").child(codigo).setValue(formula).addOnSuccessListener {
+                onSuccess()
+        }.addOnFailureListener {
+            onError()
+        }
     }
 
     fun writeNewMaterial(material: Material, userId: String, codigo: String): Boolean {

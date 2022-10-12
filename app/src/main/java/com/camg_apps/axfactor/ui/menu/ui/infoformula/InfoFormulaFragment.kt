@@ -3,23 +3,19 @@ package com.camg_apps.axfactor.ui.menu.ui.infoformula
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.core.os.bundleOf
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.camg_apps.axfactor.R
 import com.camg_apps.axfactor.common.MyUtils
 import com.camg_apps.axfactor.data.model.Formula
 import com.camg_apps.axfactor.data.model.Material
 import com.camg_apps.axfactor.databinding.FragmentMaterialListBinding
-import com.camg_apps.axfactor.ui.menu.ui.convertir_formula.FormulaConvertirFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 
 
-class InfoFormulaFragment : Fragment(), ConversionDialogFragment.NoticeDialogListener {
+class InfoFormulaFragment : Fragment() {
 
     private var _binding: FragmentMaterialListBinding? = null
     val binding get() = _binding!!
@@ -46,10 +42,10 @@ class InfoFormulaFragment : Fragment(), ConversionDialogFragment.NoticeDialogLis
     ): View? {
         _binding = FragmentMaterialListBinding.inflate(inflater, container, false)
 
-        setHasOptionsMenu(true)
+        //setHasOptionsMenu(true)
 
         Toast.makeText(requireContext(), formula!!.materiales.toString(), Toast.LENGTH_SHORT).show()
-       adapter = MaterialAdapter(formula!!.materiales!! as ArrayList<Material>, requireContext(), vmInfoFormula, formula!!.codigo)
+       adapter = MaterialAdapter(formula!!.materiales!! as ArrayList<Material>, requireContext(), vmInfoFormula, formula!!.code_reference)
         binding.list.adapter = adapter
         binding.list.layoutManager = LinearLayoutManager(requireContext())
 
@@ -58,7 +54,7 @@ class InfoFormulaFragment : Fragment(), ConversionDialogFragment.NoticeDialogLis
         setViewsData()
         return binding.root
     }
-
+/*
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_info_formula, menu)
@@ -80,6 +76,8 @@ class InfoFormulaFragment : Fragment(), ConversionDialogFragment.NoticeDialogLis
         return super.onOptionsItemSelected(item)
 
     }
+
+ */
 
     private fun showDialogConvertir() {
        val  dialogConvertir =  ConversionDialogFragment()
@@ -110,14 +108,13 @@ class InfoFormulaFragment : Fragment(), ConversionDialogFragment.NoticeDialogLis
     }
 
     private fun setNewMaterial(codigo: String, gramos: Double) {
-        vmInfoFormula.setNewMaterial(Material(codigo = codigo, gramos = gramos), MyUtils.getUserUid(requireContext()), formula!!.codigo!!)
+        vmInfoFormula.setNewMaterial(Material(codigo = codigo, gramos = gramos), MyUtils.getUserUid(requireContext()), formula!!.code_reference!!)
     }
 
     private fun setViewsData() {
         formula?.let {
-            binding.textViewCodigo.text = it.codigo
-            binding.textViewMarca.text = it.armadora
-            binding.textViewLinea.text = it.linea
+            binding.textViewCodigo.text = it.code_reference
+            binding.textViewMarca.text = it.description
             binding.imageViewColor.setBackgroundColor(it.color!!.toInt())
         }
     }
@@ -127,22 +124,7 @@ class InfoFormulaFragment : Fragment(), ConversionDialogFragment.NoticeDialogLis
         _binding = null
     }
 
-    override fun onDialogPositiveClick(dialog: DialogFragment, nuevosGramos: Double) {
-       var nuevaFormula =  vmInfoFormula.convertirFormula(nuevosGramos, formula!!)
-        goToConversionFormulaFragment(nuevaFormula, nuevosGramos)
-        dialog.dismiss()
-    }
 
-    private fun goToConversionFormulaFragment(nuevaFormula: Formula, totalGramos: Double) {
-        val bundle = bundleOf(FormulaConvertirFragment.ARG_FORMULA_CONVERTIR to nuevaFormula,
-                                FormulaConvertirFragment.ARG_TOTAL_GRAMOS to totalGramos
-                                )
-        findNavController().navigate(R.id.action_nav_info_to_formulaConvertirFragment, bundle)
-    }
-
-    override fun onDialogNegativeClick(dialog: DialogFragment) {
-        dialog.dismiss()
-    }
 
 
 }

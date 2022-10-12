@@ -20,12 +20,14 @@ class LoginViewModel(
         appRepository =  AppRepository()
         userLiveData = appRepository!!.userLiveData
     }
-
+/*
     fun login(email: String?, password: String?, activity: Activity) {
         viewModelScope.launch {
             appRepository!!.login(email, password, activity)
         }
     }
+
+ */
 
 
 }

@@ -1,12 +1,14 @@
 package com.camg_apps.axfactor.ui.menu.ui.infoformula
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
 import com.camg_apps.axfactor.R
 import com.camg_apps.axfactor.common.MyUtils
 import com.camg_apps.axfactor.data.model.Material
@@ -15,13 +17,13 @@ import com.google.android.material.textfield.TextInputLayout
 
 
 class MaterialAdapter(
-        private var values: ArrayList<Material>,
-        private val ctx: Context,
-        private val vmInfoFormula: InfoFormulaViewModel,
-        private val codigo: String?
-) : RecyclerView.Adapter<MaterialAdapter.ViewHolder>(){
+    private var values: ArrayList<Material>,
+    private val ctx: Context,
+    private val vmInfoFormula: InfoFormulaViewModel,
+    private val codigo: String?
+) : RecyclerView.Adapter<MaterialAdapter.ViewHolder>() {
 
-    private  var listener: View.OnLongClickListener? = null
+    private var listener: View.OnLongClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -40,19 +42,19 @@ class MaterialAdapter(
             showDialogEditMaterial(item)
         }
 
-        holder.clInfo.setOnLongClickListener{
-            showDialogDeleteMaterial(codigo!!, item.key, position)
+        holder.clInfo.setOnLongClickListener {
+            showDialogDeleteMaterial(codigo!!, item.codigo, position)
             true
         }
     }
 
     private fun showDialogEditMaterial(item: Material) {
-    val dialog =  MaterialAlertDialogBuilder(ctx)
+        val dialog = MaterialAlertDialogBuilder(ctx)
             .setView(R.layout.dialog_edit_material)
-            .setPositiveButton(ctx.getString(R.string.fg_newformula_aceptar)){dialog, which ->
+            .setPositiveButton(ctx.getString(R.string.fg_newformula_aceptar)) { dialog, which ->
                 //TODO aqui faltin
             }
-            .setNegativeButton(ctx.getString(R.string.txt_cancelar)){dialog, which ->
+            .setNegativeButton(ctx.getString(R.string.txt_cancelar)) { dialog, which ->
                 dialog.dismiss()
             }.show()
 
@@ -64,23 +66,23 @@ class MaterialAdapter(
 
     private fun showDialogDeleteMaterial(codigo: String, key: String?, item: Int) {
         MaterialAlertDialogBuilder(ctx)
-                .setTitle(ctx.getString(R.string.txt_eliminar_material))
-                .setMessage(ctx.getString(R.string.txt_seguro_eliminar))
-                .setPositiveButton(ctx.getString(R.string.fg_newformula_aceptar)) { dialog, which ->
-                    vmInfoFormula.deleteMaterial(MyUtils.getUserUid(ctx), codigo, key!!)
-                    values.removeAt(item)
-                    notifyItemRemoved(item)
-                }
-                .setNegativeButton(ctx.getString(R.string.txt_cancelar)) { dialog, which ->
-                    dialog.dismiss()
-                }
-                .show()
+            .setTitle(ctx.getString(R.string.txt_eliminar_material))
+            .setMessage(ctx.getString(R.string.txt_seguro_eliminar))
+            .setPositiveButton(ctx.getString(R.string.fg_newformula_aceptar)) { dialog, which ->
+                vmInfoFormula.deleteMaterial(MyUtils.getUserUid(ctx), codigo, key!!)
+                values.removeAt(item)
+                notifyItemRemoved(item)
+            }
+            .setNegativeButton(ctx.getString(R.string.txt_cancelar)) { dialog, which ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
 
     override fun getItemCount(): Int = values.size
 
-    fun setData(newValues: ArrayList<Material>){
+    fun setData(newValues: ArrayList<Material>) {
         this.values = newValues
         notifyDataSetChanged()
     }
@@ -91,6 +93,9 @@ class MaterialAdapter(
         val clInfo: ConstraintLayout = view.findViewById(R.id.clInfo)
 
     }
+
+
+
 
 
 

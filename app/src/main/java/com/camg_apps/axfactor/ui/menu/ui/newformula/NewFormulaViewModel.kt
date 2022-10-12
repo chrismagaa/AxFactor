@@ -4,37 +4,26 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.camg_apps.axfactor.data.AppRepository
-import com.camg_apps.axfactor.data.model.Armadora
 import com.camg_apps.axfactor.data.model.Formula
-import com.camg_apps.axfactor.data.model.Linea
 import kotlinx.coroutines.launch
 
 class NewFormulaViewModel: ViewModel() {
     private var appRepository: AppRepository? = null
-    var armadorasLiveData: MutableLiveData<List<Armadora>>
-    var lineasLiveData: MutableLiveData<List<Linea>>
+
+    var textResult = MutableLiveData<String>()
 
     init {
         appRepository =  AppRepository()
-        armadorasLiveData = appRepository!!.armadorasLiveData
-        lineasLiveData = appRepository!!.lineasLiveData
+        textResult.value = ""
     }
 
-    fun getArmadoras() {
+    fun setNewFormula(formula: Formula, code: String) {
         viewModelScope.launch {
-            appRepository!!.getArmadoras()
-        }
-    }
-
-    fun getLineas() {
-        viewModelScope.launch {
-            appRepository!!.getLineas()
-        }
-    }
-
-    fun setNewFormula(formula: Formula, userId: String, codigo: String) {
-        viewModelScope.launch {
-            appRepository!!.writeNewFormula(formula, userId, codigo)
+            appRepository!!.writeNewFormula(formula, code, {
+                textResult.value = "Formula guardada con éxito"
+            },{
+                textResult.value = "Error al guardar la formula"
+            })
         }
     }
 

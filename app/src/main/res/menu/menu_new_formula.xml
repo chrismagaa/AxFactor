@@ -4,7 +4,7 @@
     <item
         android:id="@+id/action_new_formula"
         android:orderInCategory="100"
-        android:title="@string/action_nueva_formula"
-        app:showAsAction="never" />
-
+        android:icon="@drawable/ic_baseline_done_24"
+        android:title="Add new formula"
+        app:showAsAction="always" />
 </menu>

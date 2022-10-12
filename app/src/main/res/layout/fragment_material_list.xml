@@ -45,18 +45,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewLinea"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Linea"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageViewColor"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCodigo" />
-
-    <TextView
         android:id="@+id/textViewMarca"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -64,27 +52,28 @@
         android:layout_marginEnd="16dp"
         android:text="Marca"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toEndOf="@+id/imageViewColor"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLinea" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewCodigo" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="416dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="10dp"
         android:background="@color/primaryLightColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewColor">
+        app:layout_constraintTop_toBottomOf="@+id/etLiters">
 
         <TextView
             android:id="@+id/textViewCodigoMaterial"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Codigo"
+            android:text="Name"
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -99,7 +88,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Gramos"
+            android:text="Weitght"
             android:textColor="#040404"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -109,5 +98,30 @@
             app:layout_constraintStart_toEndOf="@+id/textViewCodigoMaterial"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tvTitleLiters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Liters: "
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewColor" />
+
+    <EditText
+        android:id="@+id/etLiters"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:text="0.0"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTitleLiters"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvTitleLiters"
+        app:layout_constraintTop_toTopOf="@+id/tvTitleLiters" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

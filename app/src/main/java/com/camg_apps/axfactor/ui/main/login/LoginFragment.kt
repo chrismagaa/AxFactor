@@ -32,8 +32,10 @@ class LoginFragment : Fragment() {
 
         binding.buttonEntrar.setOnClickListener {
             getInputValues()
-            logIn()
-        }
+            if(email == "admin" && password == "admin"){
+                val intent = Intent(requireContext(), MenuActivity::class.java)
+                startActivity(intent)
+        }}
 
         vmLogin.userLiveData.observe(viewLifecycleOwner, Observer { firebaseUser ->
             if (firebaseUser != null) {
@@ -44,9 +46,11 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-    private fun logIn() {
+    /*private fun logIn() {
         vmLogin.login(email, password, requireActivity())
     }
+
+     */
 
     private fun goToMenuActivity() {
         val intent = Intent(requireActivity(), MenuActivity::class.java)

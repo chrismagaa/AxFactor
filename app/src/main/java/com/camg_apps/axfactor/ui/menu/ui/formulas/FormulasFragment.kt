@@ -21,8 +21,6 @@ class FormulasFragment : Fragment() {
     lateinit var adapter: FormulaAdapter
 
     val vmFormulas: FormulasViewModel by viewModels()
-    private var armadoras = ArrayList<String>()
-    private var lineas = ArrayList<String>()
     private var formulas = ArrayList<Formula>()
 
 
@@ -32,11 +30,18 @@ class FormulasFragment : Fragment() {
     ): View? {
         _binding = FragmentFormulasListBinding.inflate(inflater, container, false)
 
-        setHasOptionsMenu(true)
+        //setHasOptionsMenu(true)
 
         adapter = FormulaAdapter(listOf(), findNavController())
         binding.list.adapter = adapter
         binding.list.layoutManager = GridLayoutManager(requireContext(), 2)
+
+        binding.btnSearch.setOnClickListener {
+            binding.tvSearchSometing.visibility = View.GONE
+            binding.progress.visibility = View.VISIBLE
+
+            vmFormulas.getReferenceFormulas()
+        }
 
 
         return binding.root
@@ -51,43 +56,19 @@ class FormulasFragment : Fragment() {
         vmFormulas.setReferenceFormulas(requireActivity())
 
         vmFormulas.formulasLiveData.observe(viewLifecycleOwner, Observer {
+            binding.progress.visibility = View.GONE
             if (!it.isNullOrEmpty()) {
                 formulas.clear()
                 formulas = it as ArrayList<Formula>
                 setDataAdapter()
+            }else{
+                binding.tvSearchSometing.visibility = View.VISIBLE
             }
         })
 
-        vmFormulas.armadorasLiveData.observe(viewLifecycleOwner, Observer {
-            if(!it.isNullOrEmpty()){
-                armadoras.clear()
-                armadoras.add("Armadoras")
-                it.forEach { marca ->
-                    armadoras.add(marca.name!!)
-                }
-                setUpSpinnerArmadora()
-            }
-        })
 
-        vmFormulas.lineasLiveData.observe(viewLifecycleOwner, Observer {
-            if(!it.isNullOrEmpty()){
-                lineas.clear()
-                lineas.add("Lineas")
-                it.forEach { linea ->
-                    lineas.add(linea.name!!)
-                }
-                setUpSpinnerLinea()
-            }
-        })
-
-        if(armadoras.isEmpty()){
-            vmFormulas.getArmadoras()
-        }
-        if(lineas.isEmpty()){
-            vmFormulas.getLineas()
-        }
         if(formulas.isEmpty()){
-            vmFormulas.getFormulas()
+            vmFormulas.getReferenceFormulas()
         }
     }
 
@@ -95,17 +76,9 @@ class FormulasFragment : Fragment() {
         adapter.setData(formulas)
     }
 
-    private fun setUpSpinnerLinea() {
-        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, lineas)
-        (binding.spinnLinea.editText as? AutoCompleteTextView)?.setAdapter(adapter)
-    }
-
-    private fun setUpSpinnerArmadora() {
-        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, armadoras)
-        (binding.spinnArmadora.editText as? AutoCompleteTextView)?.setAdapter(adapter)
-    }
 
 
+/*
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu, menu)
@@ -122,6 +95,8 @@ class FormulasFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+ */
 
 
 

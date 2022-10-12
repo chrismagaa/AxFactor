@@ -8,61 +8,26 @@
     <fragment
         android:id="@+id/nav_formulas"
         android:name="com.camg_apps.axfactor.ui.menu.ui.formulas.FormulasFragment"
-        android:label="@string/menu_formulas"
+        android:label="AxFactor"
         tools:layout="@layout/fragment_formulas" >
-        <action
-            android:id="@+id/action_nav_formulas_to_newFormulaFragment"
-            app:destination="@id/newFormulaFragment" />
         <action
             android:id="@+id/action_nav_formulas_to_infoFragmentFragment"
             app:destination="@id/nav_info" />
     </fragment>
 
+
     <fragment
-        android:id="@+id/nav_inventario"
-        android:name="com.camg_apps.axfactor.ui.menu.ui.inventario.InventarioFragment"
-        android:label="@string/menu_inventario"
-        tools:layout="@layout/fragment_inventario" >
-        <action
-            android:id="@+id/action_nav_inventario_to_newInventarioFragment"
-            app:destination="@id/newInventarioFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/newFormulaFragment"
+        android:id="@+id/nav_new_formula"
         android:name="com.camg_apps.axfactor.ui.menu.ui.newformula.NewFormulaFragment"
-        android:label="@string/action_nueva_formula"
+        android:label="New Formula"
         tools:layout="@layout/fragment_new_formula" />
-    <fragment
-        android:id="@+id/newInventarioFragment"
-        android:name="com.camg_apps.axfactor.ui.menu.ui.new_inventario.NewInventarioFragment"
-        android:label="@string/txt_nuevo_anexo_inventario"
-        tools:layout="@layout/fragment_new_inventario" />
+
     <fragment
         android:id="@+id/nav_info"
         android:name="com.camg_apps.axfactor.ui.menu.ui.infoformula.InfoFormulaFragment"
-        android:label="@string/txt_detalle_formula" >
-        <action
-            android:id="@+id/action_nav_info_to_formulaConvertirFragment"
-            app:destination="@id/nav_convertir" />
+        android:label="Formula" >
+
     </fragment>
-    <fragment
-        android:id="@+id/nav_convertir"
-        android:name="com.camg_apps.axfactor.ui.menu.ui.convertir_formula.FormulaConvertirFragment"
-        android:label="@string/txt_formula_convertir" />
-    <fragment
-        android:id="@+id/nav_laboratorios"
-        android:name="com.camg_apps.axfactor.ui.menu.ui.ui_admin.laboratorios.LaboratorioFragment"
-        android:label="Laboratorios"
-        tools:layout="@layout/fragment_laboratorio_list" >
-        <action
-            android:id="@+id/action_nav_laboratorios_to_userFragment"
-            app:destination="@id/userFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/userFragment"
-        android:name="com.camg_apps.axfactor.ui.menu.ui.ui_admin.users.UserFragment"
-        android:label="Usuarios"
-        tools:layout="@layout/fragment_user_list" />
 
 
 </navigation>

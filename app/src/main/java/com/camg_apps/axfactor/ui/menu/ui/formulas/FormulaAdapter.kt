@@ -27,9 +27,8 @@ class FormulaAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.tvMarca.text = item.armadora
-        holder.tvCodigo.text = item.codigo
-        holder.tvLinea.text = item.linea
+        holder.tvMarca.text = item.code_reference
+        holder.tvCodigo.text = item.description
         holder.ivColor.setBackgroundColor(item.color!!.toInt())
 
         holder.cvFormula.setOnClickListener{

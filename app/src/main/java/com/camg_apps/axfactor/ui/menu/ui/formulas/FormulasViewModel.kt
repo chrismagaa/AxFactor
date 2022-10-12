@@ -6,15 +6,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.camg_apps.axfactor.data.AppRepository
 import com.camg_apps.axfactor.data.model.Armadora
 import com.camg_apps.axfactor.data.model.Formula
-import com.camg_apps.axfactor.data.model.Linea
 import com.camg_apps.axfactor.data.model.Material
-import com.google.android.material.datepicker.MaterialTextInputPicker
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.launch
@@ -24,17 +19,13 @@ class FormulasViewModel : ViewModel() {
     private var userUID: String = ""
     private lateinit var referenceFormulas: DatabaseReference
     var armadorasLiveData: MutableLiveData<List<Armadora>>
-    var lineasLiveData: MutableLiveData<List<Linea>>
     var formulasLiveData: MutableLiveData<List<Formula>>
 
 
 
     init {
         appRepository = AppRepository()
-
-
         armadorasLiveData = appRepository!!.armadorasLiveData
-        lineasLiveData = appRepository!!.lineasLiveData
         formulasLiveData = MutableLiveData()
     }
 
@@ -43,9 +34,37 @@ class FormulasViewModel : ViewModel() {
         userUID = sharedPref.getString("uid", "")?: ""
         Toast.makeText(activity, userUID, Toast.LENGTH_SHORT).show()
         //userUID = "EQQq3yNMM7Xeoh6fAIlVH01Q2fC3"
-        referenceFormulas = appRepository!!.database.child("formulas").child(userUID!!)
+        referenceFormulas = appRepository!!.database.child("formulas")
+
     }
 
+    fun getReferenceFormulas(){
+        referenceFormulas.get().addOnSuccessListener {
+            Log.d("FormulasViewModel", "getFormulas: ${it.value}")
+            var listFormulas = ArrayList<Formula>()
+
+                it.children.forEach{formula ->
+                    var materiales = arrayListOf<Material>()
+                    formula.child("materiales").children.forEach{
+                        it.key
+                        materiales.add(Material(it.child("name").value as String, it.child("weight").value.toString().toDouble()))
+                    }
+                    listFormulas.add(Formula(
+                        code_reference = formula.child("code_reference").value as String,
+                        description = formula.child("description").value as String,
+                        color =formula.child("color").value as Long,
+                        materiales = materiales
+                    ))
+                }
+                formulasLiveData.postValue(listFormulas)
+
+
+        }.addOnFailureListener(){
+
+        }
+    }
+
+    /*
     fun getFormulas() {
         val formulasListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -77,16 +96,7 @@ class FormulasViewModel : ViewModel() {
         referenceFormulas.addValueEventListener(formulasListener)
     }
 
-    fun getArmadoras() {
-        viewModelScope.launch {
-            appRepository!!.getArmadoras()
-        }
-    }
+     */
 
-    fun getLineas() {
-        viewModelScope.launch {
-            appRepository!!.getLineas()
-        }
-    }
 
 }

@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "830511376378",
-    "project_id": "axfactor-db",
-    "storage_bucket": "axfactor-db.appspot.com"
+    "project_number": "729827393244",
+    "project_id": "jrmn-175b3",
+    "storage_bucket": "jrmn-175b3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:830511376378:android:a1488eceb9d87118dee643",
+        "mobilesdk_app_id": "1:729827393244:android:be456b7067f01bd9797e19",
         "android_client_info": {
           "package_name": "com.camg_apps.axfactor"
         }
       },
       "oauth_client": [
         {
-          "client_id": "830511376378-vlbivmtc0c5dcqchjqe7iamlcv7d9l6e.apps.googleusercontent.com",
+          "client_id": "729827393244-rmd47do3bscttssrkidgneami6rl72ro.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.camg_apps.axfactor",
-            "certificate_hash": "49f67292797605aff209fff83ac64e09848436d4"
+            "certificate_hash": "02d2d2fae386ed3d1e735d144c0239431a9fcea1"
           }
         },
         {
-          "client_id": "830511376378-kjottr14toi0p78tvknvo21n7m79pafu.apps.googleusercontent.com",
+          "client_id": "729827393244-5ed9e023abniqdgqrkr0m678tms7mhfl.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDn3A3Q7TmlgHzXZu0KvJJA-Tm0XfdLScg"
+          "current_key": "AIzaSyB0nkIO92S5eQTofF02fFFKdLIkTzSM6kM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "830511376378-kjottr14toi0p78tvknvo21n7m79pafu.apps.googleusercontent.com",
+              "client_id": "729827393244-5ed9e023abniqdgqrkr0m678tms7mhfl.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

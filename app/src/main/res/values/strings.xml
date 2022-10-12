@@ -37,7 +37,7 @@
     <string name="txt_seguro_eliminar">¿Estas seguro que deseas eliminar esta material?</string>
     <string name="txt_editar_material">Editar material</string>
     <string name="txt_nuevo_anexo_inventario">Nuevo Anexo Inventario</string>
-    <string name="txt_buscar_codigo">Buscar codigo</string>
+    <string name="txt_buscar_codigo">Code Reference or Code Description</string>
     <string name="menu_salir">Salir</string>
     <string name="txt_total">Total:</string>
     <string name="txt_formula_convertir">Conversión de formula</string>
@@ -45,4 +45,5 @@
     <string name="menu_laboratorios">Laboratorios</string>
     <string name="action_compartir_formula">Compartir formula</string>
     <string name="prefs_file">PREFERENCE_FILE_KEY</string>
+    <string name="menu_new_formula">New Formula</string>
 </resources>

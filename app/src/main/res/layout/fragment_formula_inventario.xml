@@ -30,7 +30,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:gravity="center"
-            android:text="Codigo"
             android:textColor="@color/cardview_dark_background"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,23 +38,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textViewMarca"
+            android:id="@+id/textViewGramosM"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:foregroundGravity="center_vertical"
             android:gravity="center"
-            android:text="Linea"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageViewColor"
-            app:layout_constraintTop_toBottomOf="@+id/textViewCodigo" />
-
-        <TextView
-            android:id="@+id/textViewGramosM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/txt_Gramos"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textViewCodigo"
             app:layout_constraintTop_toBottomOf="@+id/textViewCodigo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

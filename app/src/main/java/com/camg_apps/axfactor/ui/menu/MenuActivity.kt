@@ -48,28 +48,19 @@ class MenuActivity : AppCompatActivity() {
         })
         */
 
-        navView.menu.getItem(3).setOnMenuItemClickListener {
+        navView.menu.getItem(2).setOnMenuItemClickListener {
             logOut()
             true
         }
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_formulas, R.id.nav_inventario, R.id.nav_laboratorios
+                R.id.nav_formulas, R.id.nav_new_formula
             ), drawerLayout
         )
 
         getValuesSharedPreferences(navView)
-        navView.getHeaderView(0).findViewById<TextView>(R.id.textViewEmail).text = correo
-        if(rol == ROL.USER.name){
-            navView.menu.getItem(2).isVisible = false
-        }else{
-            val navGraph = navController.graph
-         //   navGraph.startDestination =  R.id.nav_laboratorios
-            navController.graph = navGraph
-            navView.menu.getItem(0).isVisible = false
-            navView.menu.getItem(1).isVisible = false
-        }
+
 
        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
