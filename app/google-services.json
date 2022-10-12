@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "830511376378",
+    "project_id": "axfactor-db",
+    "storage_bucket": "axfactor-db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830511376378:android:a1488eceb9d87118dee643",
+        "android_client_info": {
+          "package_name": "com.camg_apps.axfactor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830511376378-vlbivmtc0c5dcqchjqe7iamlcv7d9l6e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.camg_apps.axfactor",
+            "certificate_hash": "49f67292797605aff209fff83ac64e09848436d4"
+          }
+        },
+        {
+          "client_id": "830511376378-kjottr14toi0p78tvknvo21n7m79pafu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDn3A3Q7TmlgHzXZu0KvJJA-Tm0XfdLScg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830511376378-kjottr14toi0p78tvknvo21n7m79pafu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
