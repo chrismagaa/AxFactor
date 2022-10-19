@@ -82,7 +82,7 @@ class InfoFormulaFragment : Fragment() {
     }
 
     private fun getNuevosGramos(dato: Double) : String {
-        Log.d("InfoFormulaFragment", "TOtal: $total, NuevoTotal: $nuevoTotal, dato: $dato". )
+        Log.d("InfoFormulaFragment", "TOtal: $total, NuevoTotal: $nuevoTotal, dato: $dato" )
         return decimalFormatDouble((dato/total)*nuevoTotal, "0.0")
     }
 
@@ -94,7 +94,7 @@ class InfoFormulaFragment : Fragment() {
     }
 
     fun getTotal(){
-        var totl = 0
+        var nuevoTotal = 0
         for (tint in formula!!.tints!!){
             total += tint.weight!!
         }
