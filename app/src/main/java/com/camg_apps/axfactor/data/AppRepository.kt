@@ -1,13 +1,10 @@
 package com.camg_apps.axfactor.data
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.camg_apps.axfactor.data.model.*
-import com.camg_apps.axfactor.ui.main.ROL
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -126,17 +123,19 @@ class AppRepository() {
         database.child("formulas").child(codigo).setValue(formula).addOnSuccessListener {
                 onSuccess()
         }.addOnFailureListener {
+            Log.w("FIREBASE_WRITE_FORMULA", "loadPost:onCancelled")
+            Log.w("FIREBASE_WRITE_FORMULA", it.message.toString())
             onError()
         }
     }
 
-    fun writeNewMaterial(material: Material, userId: String, codigo: String): Boolean {
-        database.child("formulas").child(userId).child(codigo).child("materiales").push().setValue(material)
+    fun writeNewMaterial(material: Tint, userId: String, codigo: String): Boolean {
+        database.child("formulas").child(userId).child(codigo).child("tints").push().setValue(material)
         return false
     }
 
     fun deleteMaterial(userId: String, codigo: String, key: String) {
-        database.child("formulas").child(userId).child(codigo).child("materiales").child(key).removeValue()
+        database.child("formulas").child(userId).child(codigo).child("tints").child(key).removeValue()
 
     }
 

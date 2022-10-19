@@ -4,28 +4,28 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.camg_apps.axfactor.data.AppRepository
 import com.camg_apps.axfactor.data.model.Formula
-import com.camg_apps.axfactor.data.model.Material
+import com.camg_apps.axfactor.data.model.Tint
 import kotlinx.coroutines.launch
 
 class InfoFormulaViewModel: ViewModel() {
     private var appRepository: AppRepository? = AppRepository()
 
     fun convertirFormula(nuevosGramos: Double, formula: Formula): Formula {
-        if(formula.materiales!!.isNotEmpty()){
+        if(formula.tints!!.isNotEmpty()){
             //get total gramos
             var totalGramos = 0.0
-            formula.materiales.forEach{
-               totalGramos+=it.gramos!!
+            formula.tints.forEach{
+               totalGramos+=it.weight!!
             }
 
-             formula.materiales.forEach {
-                 it.gramos = (it.gramos!!*totalGramos)/nuevosGramos
+             formula.tints.forEach {
+                 it.weight = (it.weight!!*totalGramos)/nuevosGramos
              }
          }
         return formula
     }
 
-    fun setNewMaterial(material: Material, userId: String, codigo: String){
+    fun setNewMaterial(material: Tint, userId: String, codigo: String){
         viewModelScope.launch {
             appRepository!!.writeNewMaterial(material, userId, codigo)
         }

@@ -9,10 +9,8 @@ import androidx.lifecycle.ViewModel
 import com.camg_apps.axfactor.data.AppRepository
 import com.camg_apps.axfactor.data.model.Armadora
 import com.camg_apps.axfactor.data.model.Formula
-import com.camg_apps.axfactor.data.model.Material
+import com.camg_apps.axfactor.data.model.Tint
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
-import kotlinx.coroutines.launch
 
 class FormulasViewModel : ViewModel() {
     private var appRepository: AppRepository? = null
@@ -27,6 +25,7 @@ class FormulasViewModel : ViewModel() {
         appRepository = AppRepository()
         armadorasLiveData = appRepository!!.armadorasLiveData
         formulasLiveData = MutableLiveData()
+        referenceFormulas = appRepository!!.database.child("formulas")
     }
 
     fun setReferenceFormulas(activity: Activity){
@@ -42,23 +41,19 @@ class FormulasViewModel : ViewModel() {
         referenceFormulas.get().addOnSuccessListener {
             Log.d("FormulasViewModel", "getFormulas: ${it.value}")
             var listFormulas = ArrayList<Formula>()
-
                 it.children.forEach{formula ->
-                    var materiales = arrayListOf<Material>()
-                    formula.child("materiales").children.forEach{
-                        it.key
-                        materiales.add(Material(it.child("name").value as String, it.child("weight").value.toString().toDouble()))
+                    var materiales = arrayListOf<Tint>()
+                    formula.child("tints").children.forEach{
+                        materiales.add(Tint(it.child("name").value as String, it.child("weight").value.toString().toDouble()))
                     }
                     listFormulas.add(Formula(
                         code_reference = formula.child("code_reference").value as String,
                         description = formula.child("description").value as String,
                         color =formula.child("color").value as Long,
-                        materiales = materiales
+                        tints = materiales
                     ))
                 }
                 formulasLiveData.postValue(listFormulas)
-
-
         }.addOnFailureListener(){
 
         }

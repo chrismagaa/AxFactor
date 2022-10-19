@@ -1,8 +1,6 @@
 package com.camg_apps.axfactor.ui.menu.ui.infoformula
 
 import android.content.Context
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +9,13 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.camg_apps.axfactor.R
 import com.camg_apps.axfactor.common.MyUtils
-import com.camg_apps.axfactor.data.model.Material
+import com.camg_apps.axfactor.data.model.Tint
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 
 
 class MaterialAdapter(
-    private var values: ArrayList<Material>,
+    private var values: ArrayList<Tint>,
     private val ctx: Context,
     private val vmInfoFormula: InfoFormulaViewModel,
     private val codigo: String?
@@ -34,8 +32,8 @@ class MaterialAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.tvCodigo.text = item.codigo
-        holder.tvGramos.text = item.gramos.toString()
+        holder.tvCodigo.text = item.name
+        holder.tvGramos.text = item.weight.toString()
 
 
         holder.clInfo.setOnClickListener {
@@ -43,12 +41,12 @@ class MaterialAdapter(
         }
 
         holder.clInfo.setOnLongClickListener {
-            showDialogDeleteMaterial(codigo!!, item.codigo, position)
+            showDialogDeleteMaterial(codigo!!, item.name, position)
             true
         }
     }
 
-    private fun showDialogEditMaterial(item: Material) {
+    private fun showDialogEditMaterial(item: Tint) {
         val dialog = MaterialAlertDialogBuilder(ctx)
             .setView(R.layout.dialog_edit_material)
             .setPositiveButton(ctx.getString(R.string.fg_newformula_aceptar)) { dialog, which ->
@@ -58,8 +56,8 @@ class MaterialAdapter(
                 dialog.dismiss()
             }.show()
 
-        dialog.findViewById<TextInputLayout>(R.id.textInputEditCodigo)!!.editText!!.setText(item.codigo)
-        dialog.findViewById<TextInputLayout>(R.id.textInputEditGramos)!!.editText!!.setText(item.gramos.toString())
+        dialog.findViewById<TextInputLayout>(R.id.textInputEditCodigo)!!.editText!!.setText(item.name)
+        dialog.findViewById<TextInputLayout>(R.id.textInputEditGramos)!!.editText!!.setText(item.weight.toString())
 
 
     }
@@ -82,7 +80,7 @@ class MaterialAdapter(
 
     override fun getItemCount(): Int = values.size
 
-    fun setData(newValues: ArrayList<Material>) {
+    fun setData(newValues: ArrayList<Tint>) {
         this.values = newValues
         notifyDataSetChanged()
     }

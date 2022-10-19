@@ -49,23 +49,11 @@
             android:gravity="center"
             android:text="Armadora"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textViewLinea"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewCodigo" />
 
-        <TextView
-            android:id="@+id/textViewLinea"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Linea"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewMarca" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

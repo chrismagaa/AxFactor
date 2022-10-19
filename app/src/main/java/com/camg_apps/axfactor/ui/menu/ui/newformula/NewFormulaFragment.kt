@@ -1,25 +1,19 @@
 package com.camg_apps.axfactor.ui.menu.ui.newformula
 
-import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.camg_apps.axfactor.R
-import com.camg_apps.axfactor.common.MyUtils
 import com.camg_apps.axfactor.data.model.Formula
-import com.camg_apps.axfactor.data.model.Material
+import com.camg_apps.axfactor.data.model.Tint
 import com.camg_apps.axfactor.databinding.FragmentNewFormulaBinding
-import com.camg_apps.axfactor.ui.menu.ui.infoformula.MaterialAdapter
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerClickListener
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
@@ -33,7 +27,7 @@ class NewFormulaFragment : Fragment() {
     val vmNewFormula: NewFormulaViewModel by viewModels()
     private var color: Int = Color.BLACK
 
-    private var materiales: ArrayList<Material> = ArrayList()
+    private var materiales: ArrayList<Tint> = ArrayList()
     lateinit var adapter: MaterialNewAdapter
 
     override fun onCreateView(
@@ -65,7 +59,8 @@ class NewFormulaFragment : Fragment() {
     }
 
     private fun addTint() {
-        materiales.add(Material("",0.0))
+        materiales = adapter.getValues()
+        materiales.add(Tint("s",1.0))
         adapter.setData(materiales)
     }
 
@@ -73,7 +68,7 @@ class NewFormulaFragment : Fragment() {
         val code_reference = binding.inputCodeReference.editText!!.text.toString()
         val description = binding.inputDescription.editText!!.text.toString()
 
-        return Formula(code_reference, description, color.toLong(), listOf<Material>())
+        return Formula(code_reference, description, color.toLong(), listOf<Tint>())
     }
 
 
@@ -94,7 +89,8 @@ class NewFormulaFragment : Fragment() {
         when(item.itemId){
             R.id.action_new_formula -> {
                 //Create new formula
-                val listMateriales = materiales.filter { it.gramos != 0.0 || it.gramos != null }
+                materiales = adapter.getValues()
+                val listMateriales = materiales.filter { it.weight != 0.0 || it.weight != null }
 
                 val formula = Formula(binding.inputCodeReference.editText!!.text.toString(),
                     binding.inputDescription.editText!!.text.toString(),

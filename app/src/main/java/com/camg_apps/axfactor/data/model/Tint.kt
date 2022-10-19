@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @IgnoreExtraProperties
 @Parcelize
-data class Material(
-        var codigo: String? = "",
-        var gramos: Double? = 0.0
+data class Tint(
+        var name: String? = "",
+        var weight: Double? = 0.0
 ) : Parcelable

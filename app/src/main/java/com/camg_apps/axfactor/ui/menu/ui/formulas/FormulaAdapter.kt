@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import com.camg_apps.axfactor.R
@@ -29,7 +30,7 @@ class FormulaAdapter(
         val item = values[position]
         holder.tvMarca.text = item.code_reference
         holder.tvCodigo.text = item.description
-        holder.ivColor.setBackgroundColor(item.color!!.toInt())
+        //holder.ivColor.setBackgroundColor()
 
         holder.cvFormula.setOnClickListener{
             val bundle = bundleOf(InfoFormulaFragment.PARAMETER_FORMULA to item)
@@ -45,10 +46,8 @@ class FormulaAdapter(
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvMarca: TextView = view.findViewById(R.id.textViewLinea)
+        val tvMarca: TextView = view.findViewById(R.id.textViewMarca)
         val tvCodigo: TextView = view.findViewById(R.id.textViewCodigo)
-        val tvLinea: TextView = view.findViewById(R.id.textViewMarca)
-        val ivColor: ImageView = view.findViewById(R.id.imageViewColor)
         val cvFormula: CardView = view.findViewById(R.id.cvFormula)
     }
 }

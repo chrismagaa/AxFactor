@@ -1,6 +1,7 @@
 package com.camg_apps.axfactor.ui.menu.ui.formulas
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -43,6 +44,8 @@ class FormulasFragment : Fragment() {
             vmFormulas.getReferenceFormulas()
         }
 
+        vmFormulas.getReferenceFormulas()
+
 
         return binding.root
     }
@@ -60,6 +63,7 @@ class FormulasFragment : Fragment() {
             if (!it.isNullOrEmpty()) {
                 formulas.clear()
                 formulas = it as ArrayList<Formula>
+                Log.d("FormulasFragment", "Formulas: $formulas")
                 setDataAdapter()
             }else{
                 binding.tvSearchSometing.visibility = View.VISIBLE
